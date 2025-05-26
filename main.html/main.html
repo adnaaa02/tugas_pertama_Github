@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordPress Architecture</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .architecture-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .title {
+            text-align: center;
+            color: white;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .layer {
+            margin-bottom: 15px;
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .layer:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .layer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+            border-radius: inherit;
+        }
+        
+        .layer-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .layer-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .layer-tech {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(0, 0, 0, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .layer-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.3));
+        }
+        
+        /* Specific layer colors and gradients */
+        .frontend {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+        
+        .application {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+        
+        .core {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+        
+        .database-access {
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+        }
+        
+        .database {
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+        }
+        
+        .arrow {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.5em;
+            margin: 10px 0;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-5px);
+            }
+            60% {
+                transform: translateY(-3px);
+            }
+        }
+        
+        .connection-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            margin: 5px 0;
+            animation: flow 3s linear infinite;
+        }
+        
+        @keyframes flow {
+            0% {
+                background-position: -100% 0;
+            }
+            100% {
+                background-position: 100% 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="architecture-container">
+        <h1 class="title">WordPress Architecture</h1>
+        
+        <div class="layer frontend">
+            <div class="layer-content">
+                <div style="display: flex; align-items: center;">
+                    <svg class="layer-icon" viewBox="0 0 24 24" fill="white">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <span class="layer-title">Frontend UI</span>
+                </div>
+                <span class="layer-tech">HTML, CSS, JS</span>
+            </div>
+        </div>
+        
+        <div class="arrow">↓</div>
+        <div class="connection-line"></div>
+        
+        <div class="layer application">
+            <div class="layer-content">
+                <div style="display: flex; align-items: center;">
+                    <svg class="layer-icon" viewBox="0 0 24 24" fill="white">
+                        <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                    </svg>
+                    <span class="layer-title">Application Logic</span>
+                </div>
+                <span class="layer-tech">PHP</span>
+            </div>
+        </div>
+        
+        <div class="arrow">↓</div>
+        <div class="connection-line"></div>
+        
+        <div class="layer core">
+            <div class="layer-content">
+                <div style="display: flex; align-items: center;">
+                    <svg class="layer-icon" viewBox="0 0 24 24" fill="white">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <span class="layer-title">WordPress Core</span>
+                </div>
+                <span class="layer-tech">CMS Engine</span>
+            </div>
+        </div>
+        
+        <div class="arrow">↓</div>
+        <div class="connection-line"></div>
+        
+        <div class="layer database-access">
+            <div class="layer-content">
+                <div style="display: flex; align-items: center;">
+                    <svg class="layer-icon" viewBox="0 0 24 24" fill="white">
+                        <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                    </svg>
+                    <span class="layer-title">Database Access Layer</span>
+                </div>
+                <span class="layer-tech">MySQL Queries</span>
+            </div>
+        </div>
+        
+        <div class="arrow">↓</div>
+        <div class="connection-line"></div>
+        
+        <div class="layer database">
+            <div class="layer-content">
+                <div style="display: flex; align-items: center;">
+                    <svg class="layer-icon" viewBox="0 0 24 24" fill="white">
+                        <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                    </svg>
+                    <span class="layer-title">Database</span>
+                </div>
+                <span class="layer-tech">MySQL</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive hover effects
+        const layers = document.querySelectorAll('.layer');
+        
+        layers.forEach(layer => {
+            layer.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.03)';
+                this.style.filter = 'brightness(1.1)';
+            });
+            
+            layer.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.filter = 'brightness(1)';
+            });
+        });
+    </script>
+</body>
+</html>
